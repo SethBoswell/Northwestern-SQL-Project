@@ -20,6 +20,7 @@ ORDER BY rt.emp_no, rt.to_date DESC;
 
 -- Retiring Titles Table
 SELECT COUNT(u.emp_no), u.title
+INTO retiring_tables
 FROM unique_titles as u
 GROUP BY u.title
 ORDER BY COUNT(u.emp_no) DESC;
@@ -37,3 +38,17 @@ ON (e.emp_no = ti.emp_no)
 WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
 AND (de.to_date = '9999-01-01');
 ORDER BY e.emp_no;
+
+-- Mentoring Titles Table
+SELECT COUNT(m.emp_no), m.title
+INTO mentoring_titles
+FROM mentorship_eligibilty as m
+GROUP BY m.title
+ORDER BY COUNT(m.emp_no) DESC;
+
+-- Salaries Titles Table
+SELECT SUM(u.emp_no), u.title
+INTO salaries_titles
+FROM unique_titles as u
+GROUP BY u.title
+ORDER BY SUM(u.emp_no) DESC;
